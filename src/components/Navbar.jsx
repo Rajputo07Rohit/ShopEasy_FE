@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
+import { ModeToggle } from "./mode-toggle";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -90,6 +91,7 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </li>
+            <ModeToggle />
           </ul>
         </nav>
       </div>
