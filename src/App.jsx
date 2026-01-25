@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import { UserData } from "./context/UserContext";
 import Verify from "./pages/Verify";
 import Loading from "./components/Loading";
+import Products from "./pages/Products";
 const App = () => {
   const { isAuth, loading } = UserData();
 
@@ -23,6 +24,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={isAuth ? <Home /> : <Login />} />
             <Route path="/verify" element={isAuth ? <Home /> : <Verify />} />
+            <Route path="/products" element={<Products />} />
+
             <Route
               path="*"
               element={
