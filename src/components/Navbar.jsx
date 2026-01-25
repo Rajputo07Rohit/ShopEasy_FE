@@ -13,7 +13,7 @@ import { ModeToggle } from "./mode-toggle";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const isAuth = true;
+  const isAuth = false;
 
   const logoutHandler = () => {
     alert("Logged out");
