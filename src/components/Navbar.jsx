@@ -10,15 +10,12 @@ import {
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
 import { ModeToggle } from "./mode-toggle";
+import { UserData } from "@/context/UserContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const isAuth = false;
 
-  const logoutHandler = () => {
-    alert("Logged out");
-  };
-
+  const { logoutUser, isAuth } = UserData();
   return (
     <header className="sticky top-0 z-50 backdrop-blur-lg bg-background/70 border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -81,7 +78,7 @@ const Navbar = () => {
                         Orders
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={logoutHandler}
+                        onClick={logoutUser}
                         className="text-red-500 focus:text-red-500"
                       >
                         Logout

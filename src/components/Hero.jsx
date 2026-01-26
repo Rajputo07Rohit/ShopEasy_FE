@@ -7,7 +7,7 @@ const Hero = ({ navigate }) => {
     <div
       className="relative h-[calc(100vh-100px)] bg-cover bg-center"
       style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2)), url(${bgImage})`,
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(${bgImage})`,
       }}
     >
       <div className="flex items-center justify-center h-full text-center text-white">

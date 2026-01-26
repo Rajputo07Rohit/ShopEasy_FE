@@ -1,12 +1,9 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { IndianRupee, ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const ProductsCard = ({ product, latest }) => {
-  const navigate = useNavigate();
-
   if (!product) return null;
 
   const imageUrl = product?.images?.[0]?.url;
@@ -15,18 +12,20 @@ const ProductsCard = ({ product, latest }) => {
   const price = product?.price || 0;
 
   return (
-    <div className="group rounded-2xl border border-border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+    <div className="w-full rounded-xl border border-border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-all overflow-hidden">
       {/* ✅ Image */}
-      <Link to={`/product/${product._id}`} className="block">
-        <div className="relative w-full aspect-[4/3] bg-muted flex items-center justify-center overflow-hidden">
+      <Link to={`/product/${product._id}`}>
+        <div className="relative bg-muted h-[220px] sm:h-[240px] md:h-[260px] overflow-hidden flex items-center justify-center">
           {imageUrl ? (
             <img
               src={imageUrl}
               alt={title}
-              className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
+              className="h-full w-full object-contain p-4 transition-transform duration-300 hover:scale-105"
             />
           ) : (
-            <p className="text-sm text-muted-foreground">No Image</p>
+            <div className="h-full w-full flex items-center justify-center">
+              <p className="text-sm text-muted-foreground">No Image</p>
+            </div>
           )}
 
           {/* ✅ Badge */}
@@ -39,27 +38,20 @@ const ProductsCard = ({ product, latest }) => {
       </Link>
 
       {/* ✅ Content */}
-      <div className="p-4 space-y-2">
-        <h3 className="text-base font-semibold leading-tight line-clamp-1">
-          {title}
-        </h3>
+      <div className="p-4">
+        <h3 className="text-base font-semibold line-clamp-1">{title}</h3>
 
-        <p className="text-sm text-muted-foreground line-clamp-2">{desc}</p>
+        <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
+          {desc}
+        </p>
 
-        {/* ✅ Price */}
-        <div className="flex items-center justify-between pt-2">
-          <p className="text-lg font-bold flex items-center gap-1">
-            <IndianRupee className="h-4 w-4" />
-            {price}
-          </p>
+        <p className="text-sm font-medium mt-2">₹ {price}</p>
 
-          <Button
-            size="sm"
-            className="rounded-xl"
-            onClick={() => navigate(`/product/${product._id}`)}
-          >
-            View <ArrowRight className="h-4 w-4 ml-1" />
-          </Button>
+        {/* ✅ Button */}
+        <div className="flex justify-center mt-4">
+          <Link to={`/products`} className="w-full">
+            <Button className="w-full rounded-md">View Product</Button>
+          </Link>
         </div>
       </div>
     </div>
