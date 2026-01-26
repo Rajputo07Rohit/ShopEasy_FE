@@ -78,7 +78,10 @@ const Navbar = () => {
                         Orders
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={logoutUser}
+                        onClick={() => {
+                          logoutUser();
+                          navigate("/login");
+                        }}
                         className="text-red-500 focus:text-red-500"
                       >
                         Logout
