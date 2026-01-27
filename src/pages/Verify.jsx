@@ -4,10 +4,13 @@ import { Input } from "@/components/ui/input";
 import { Loader, ShieldCheck } from "lucide-react";
 import { UserData } from "@/context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { CartData } from "@/context/CartContext";
 
 const Verify = () => {
   const navigate = useNavigate();
   const OTP_LENGTH = 6;
+
+  const { getCart } = CartData();
 
   const [otp, setOtp] = useState(Array(OTP_LENGTH).fill(""));
   const { verifyLoading, resendOtp, verifyUser } = UserData();
@@ -79,7 +82,7 @@ const Verify = () => {
     e.preventDefault();
     if (otpValue.length !== OTP_LENGTH) return;
 
-    verifyUser(Number(otpValue), navigate);
+    verifyUser(Number(otpValue), navigate, getCart);
   };
 
   const resendOtpHandler = async () => {

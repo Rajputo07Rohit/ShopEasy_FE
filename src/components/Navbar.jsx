@@ -11,11 +11,14 @@ import {
 } from "./ui/dropdown-menu";
 import { ModeToggle } from "./mode-toggle";
 import { UserData } from "@/context/UserContext";
+import { CartData } from "@/context/CartContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   const { logoutUser, isAuth } = UserData();
+
+  const { totalItem, setTotalItem } = CartData();
   return (
     <header className="sticky top-0 z-50 backdrop-blur-lg bg-background/70 border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -50,8 +53,8 @@ const Navbar = () => {
               className="relative cursor-pointer group"
             >
               <ShoppingCart className="w-5 h-5 group-hover:text-primary transition" />
-              <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-semibold w-5 h-5 flex items-center justify-center rounded-full scale-90 group-hover:scale-100 transition-transform">
-                5
+              <span className="absolute -top-2 -right-2 bg-red-700 text-white text-[10px] font-semibold w-5 h-5 flex items-center justify-center rounded-full scale-90 group-hover:scale-100 transition-transform">
+                {totalItem ? totalItem : 0}
               </span>
             </li>
 
@@ -79,7 +82,7 @@ const Navbar = () => {
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => {
-                          logoutUser();
+                          logoutUser(setTotalItem);
                           navigate("/login");
                         }}
                         className="text-red-500 focus:text-red-500"

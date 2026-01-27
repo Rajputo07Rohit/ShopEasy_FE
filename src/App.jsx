@@ -9,6 +9,8 @@ import { UserData } from "./context/UserContext";
 import Verify from "./pages/Verify";
 import Loading from "./components/Loading";
 import Products from "./pages/Products";
+import NotFound from "./pages/NotFound";
+import ProductPage from "./pages/ProductPage";
 const App = () => {
   const { isAuth, loading } = UserData();
 
@@ -25,13 +27,9 @@ const App = () => {
             <Route path="/login" element={isAuth ? <Home /> : <Login />} />
             <Route path="/verify" element={isAuth ? <Home /> : <Verify />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/product/:id" element={<ProductPage />} />
 
-            <Route
-              path="*"
-              element={
-                <h1 className="text-center mt-20">404 Page Not Found</h1>
-              }
-            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </BrowserRouter>

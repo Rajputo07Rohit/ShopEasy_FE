@@ -15,7 +15,7 @@ const ProductsCard = ({ product, latest }) => {
     <div className="w-full rounded-xl border border-border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-all overflow-hidden">
       {/* ✅ Image */}
       <Link to={`/product/${product._id}`}>
-        <div className="relative bg-muted h-[220px] sm:h-[240px] md:h-[260px] overflow-hidden flex items-center justify-center">
+        <div className="relative bg-muted h-55 sm:h-60 md:h-65 overflow-hidden flex items-center justify-center">
           {imageUrl ? (
             <img
               src={imageUrl}
@@ -49,7 +49,7 @@ const ProductsCard = ({ product, latest }) => {
 
         {/* ✅ Button */}
         <div className="flex justify-center mt-4">
-          <Link to={`/products`} className="w-full">
+          <Link to={`/product/${product._id}`} className="w-full">
             <Button className="w-full rounded-md">View Product</Button>
           </Link>
         </div>

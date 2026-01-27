@@ -1,11 +1,11 @@
 import React from "react";
+import { Loader2 } from "lucide-react";
 
 const Loading = () => {
   return (
-    <div className="flex-col gap-4 w-full flex items-center justify-center mt-40">
-      <div className="w-16 h-26 border-4 border-transparent text-red-400 text-4xl animate-spin flex items-center justify-center border-t-red-400 rounded-full">
-        <div className="w-16 h-26 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full"></div>
-      </div>
+    <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
+      <Loader2 className="h-10 w-10 text-primary animate-spin" />
+      <p className="text-sm text-muted-foreground">Loading, please wait…</p>
     </div>
   );
 };

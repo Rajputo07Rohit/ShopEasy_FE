@@ -37,7 +37,7 @@ export const UserProvider = ({ children }) => {
   };
 
   // ✅ VERIFY USER (Verify OTP)
-  const verifyUser = async (otp, navigate) => {
+  const verifyUser = async (otp, navigate, getCart) => {
     setVerifyLoading(true);
 
     const email = localStorage.getItem("email");
@@ -67,6 +67,7 @@ export const UserProvider = ({ children }) => {
       // ✅ Save user in state
       setUser(data.user);
       setIsAuth(true);
+      getCart();
 
       // ✅ Clear localStorage OTP email
       localStorage.removeItem("email");
@@ -101,10 +102,12 @@ export const UserProvider = ({ children }) => {
   };
 
   // ✅ LOGOUT
-  const logoutUser = () => {
+  const logoutUser = (setTotalItem) => {
     Cookies.remove("token");
     setUser(null);
     setIsAuth(false);
+    setTotalItem(0);
+
     toast.success("Logged out ✅");
   };
 
