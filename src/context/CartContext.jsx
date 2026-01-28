@@ -54,6 +54,35 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const updateCart = async (action, id) => {
+    try {
+      const { data } = await axios.post(
+        `${server}/api/cart/update?action=${action}`,
+        { id },
+        {
+          headers: { token },
+        }
+      );
+
+      getCart();
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const removeCart = async (id) => {
+    try {
+      const { data } = await axios.get(`${server}/api/cart/remove/${id}`, {
+        headers: { token },
+      });
+
+      toast.success(data.message);
+      getCart();
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   useEffect(() => {
     getCart();
   }, []);
@@ -68,6 +97,8 @@ export const CartProvider = ({ children }) => {
         loading,
         getCart,
         addToCart,
+        updateCart,
+        removeCart,
       }}
     >
       {children}

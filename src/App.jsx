@@ -11,6 +11,8 @@ import Loading from "./components/Loading";
 import Products from "./pages/Products";
 import NotFound from "./pages/NotFound";
 import ProductPage from "./pages/ProductPage";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 const App = () => {
   const { isAuth, loading } = UserData();
 
@@ -28,6 +30,8 @@ const App = () => {
             <Route path="/verify" element={isAuth ? <Home /> : <Verify />} />
             <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
