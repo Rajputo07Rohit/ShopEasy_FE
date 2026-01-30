@@ -128,7 +128,7 @@ export const UserProvider = ({ children }) => {
       });
 
       setIsAuth(true);
-      setUser(data.user);
+      setUser(data);
       setLoading(false);
     } catch (error) {
       setIsAuth(false);

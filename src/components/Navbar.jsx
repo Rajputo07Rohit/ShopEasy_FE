@@ -16,9 +16,10 @@ import { CartData } from "@/context/CartContext";
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const { logoutUser, isAuth } = UserData();
+  const { logoutUser, isAuth, user } = UserData();
 
   const { totalItem, setTotalItem } = CartData();
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur-lg bg-background/70 border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -80,6 +81,13 @@ const Navbar = () => {
                       <DropdownMenuItem onClick={() => navigate("/orders")}>
                         Orders
                       </DropdownMenuItem>
+                      {user && user.role === "admin" && (
+                        <DropdownMenuItem
+                          onClick={() => navigate("/admin/dashboard")}
+                        >
+                          Dashboard
+                        </DropdownMenuItem>
+                      )}
                       <DropdownMenuItem
                         onClick={() => {
                           logoutUser(setTotalItem);
