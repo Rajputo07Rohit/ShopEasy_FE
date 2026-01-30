@@ -77,7 +77,7 @@ const Navbar = () => {
                     </DropdownMenuItem>
                   ) : (
                     <>
-                      <DropdownMenuItem onClick={() => navigate("/order")}>
+                      <DropdownMenuItem onClick={() => navigate("/orders")}>
                         Orders
                       </DropdownMenuItem>
                       <DropdownMenuItem

@@ -13,6 +13,9 @@ import NotFound from "./pages/NotFound";
 import ProductPage from "./pages/ProductPage";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
+import OrderProcessing from "./pages/OrderProcessing";
+import Orders from "./pages/Orders";
 const App = () => {
   const { isAuth, loading } = UserData();
 
@@ -30,8 +33,21 @@ const App = () => {
             <Route path="/verify" element={isAuth ? <Home /> : <Verify />} />
             <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/cart" element={isAuth ? <Cart /> : <Login />} />
+            <Route
+              path="/checkout"
+              element={isAuth ? <Checkout /> : <Login />}
+            />
+            <Route
+              path="/payment/:id"
+              element={isAuth ? <Payment /> : <Login />}
+            />
+            <Route
+              path="/ordersuccess"
+              element={isAuth ? <OrderProcessing /> : <Login />}
+            />
+
+            <Route path="/orders" element={isAuth ? <Orders /> : <Login />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
