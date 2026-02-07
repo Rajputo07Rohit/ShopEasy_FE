@@ -11,21 +11,30 @@ import {
   X,
   LayoutDashboard,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const NAVBAR_HEIGHT = "top-16"; // matches h-16 navbar
+const NAVBAR_HEIGHT = "top-16";
 
 const AdminDashboard = () => {
   const [selectedPage, setSelectedPage] = useState("home");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { user, loading } = UserData();
 
-  const { user } = UserData();
+  /* ================= AUTH GUARD ================= */
+  useEffect(() => {
+    if (!loading) {
+      if (!user || user.role !== "admin") {
+        navigate("/", { replace: true });
+      }
+    }
+  }, [user, loading, navigate]);
 
-  if (!user.role !== "admin") return navigate("home");
+  if (loading) return null; // or spinner
 
+  /* ================= PAGE RENDER ================= */
   const renderPageContent = () => {
     switch (selectedPage) {
       case "home":
@@ -50,8 +59,7 @@ const AdminDashboard = () => {
           selectedPage === value
             ? "bg-primary text-primary-foreground shadow"
             : "hover:bg-muted"
-        }
-      `}
+        }`}
     >
       <Icon className="w-5 h-5" />
       {label}
@@ -68,12 +76,11 @@ const AdminDashboard = () => {
           border-r
           transform transition-transform duration-300
           overflow-y-auto
-          lg:relative lg:top-0 lg:bottom-0 lg:translate-x-0
+          lg:relative lg:top-0 lg:translate-x-0
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
         <div className="flex flex-col h-full p-6">
-          {/* Logo */}
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center gap-2">
               <LayoutDashboard className="w-6 h-6 text-primary" />
@@ -90,23 +97,20 @@ const AdminDashboard = () => {
             </Button>
           </div>
 
-          {/* Navigation */}
           <nav className="flex flex-col gap-2">
             <NavButton icon={Home} label="Dashboard" value="home" />
             <NavButton icon={ShoppingBag} label="Orders" value="order" />
             <NavButton icon={Info} label="Info" value="info" />
           </nav>
 
-          {/* Footer */}
           <div className="mt-auto pt-6 text-xs text-muted-foreground">
             © {new Date().getFullYear()} ShopEasyPro
           </div>
         </div>
       </aside>
 
-      {/* ================= MAIN CONTENT ================= */}
+      {/* ================= MAIN ================= */}
       <div className="flex-1 flex flex-col pt-16 lg:pt-0">
-        {/* Top Bar */}
         <header className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 border-b bg-background/70 backdrop-blur">
           <Button
             variant="outline"
@@ -117,14 +121,13 @@ const AdminDashboard = () => {
             <Menu className="w-5 h-5" />
           </Button>
 
-          <h2 className="text-lg font-semibold tracking-tight">
+          <h2 className="text-lg font-semibold">
             {selectedPage === "home" && "Dashboard"}
             {selectedPage === "order" && "Orders"}
             {selectedPage === "info" && "Info"}
           </h2>
         </header>
 
-        {/* Page Content */}
         <main className="flex-1 p-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">{renderPageContent()}</div>
         </main>
