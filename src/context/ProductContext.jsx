@@ -73,6 +73,7 @@ export const ProductProvider = ({ children }) => {
         getProduct,
         product,
         relatedProduct,
+        getProducts,
       }}
     >
       {children}
